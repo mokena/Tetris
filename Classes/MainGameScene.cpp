@@ -44,13 +44,81 @@ bool MainGame::init()
 /*Initiate the UI and layout*/
 void MainGame::initUI() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
-	blockHeight = visibleSize.height / 20;
-	blockWidth = blockHeight;
+	blockWidth = blockHeight = BLOCKW;
+
+	for (int i = 0; i < ROW; i++) {
+		for (int j = 0; j < COLUMN; j++) {
+			allBlocks[i][j] = nullptr;
+		}
+	}
+
+	for (int i = 0; i < TNUM; i++) {
+		curTetris[i] = nullptr;
+		nextTetris[i] = nullptr;
+	}
+
 }
+
 
 /*When player come into this scene, start game immediately*/
 void MainGame::startGame() {
 
+}
+
+void MainGame::randomTetris(bool cur)
+{
+	int rand = CCRANDOM_0_1()*(TSTYLE - 1);
+	for (int i = 0; i < TNUM; i++) {
+		Sprite* block = Sprite::create("block.png");
+		nextTetris[i] = block;
+		addChild(block);
+	}
+	switch (rand) {
+	case 0: //I
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 1: //L
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 2: //J
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 3: //Z
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 4: //S
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 5: //O
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	case 6: //T
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		break;
+	default:
+		break;
+	}
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
