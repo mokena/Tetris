@@ -31,6 +31,7 @@ public:
 	void initUI();
 	void startGame();
 	void randomTetris(bool cur);
+	void nextToCur();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

@@ -81,43 +81,50 @@ void MainGame::randomTetris(bool cur)
 		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
 		break;
 	case 1: //L
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
 		break;
 	case 2: //J
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
 		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
 		break;
 	case 3: //Z
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 8));
 		break;
 	case 4: //S
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 6));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 5));
 		break;
 	case 5: //O
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
 		break;
 	case 6: //T
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
 		break;
 	default:
 		break;
+	}
+}
+
+void MainGame::nextToCur()
+{
+	for (int i = 0; i < TNUM; i++) {
+		curTetris[i] = nextTetris[i];
 	}
 }
 
