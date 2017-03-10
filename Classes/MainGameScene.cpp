@@ -57,21 +57,30 @@ void MainGame::initUI() {
 		nextTetris[i] = nullptr;
 	}
 
+	// background
+	Sprite* bg = Sprite::create("bg.png");
+	bg->setAnchorPoint(Vec2(0, 0));
+	bg->setPosition(ccp(0, 0));
+	addChild(bg);
+	auto testsize = bg->getContentSize();
+	int i = 0;
 }
 
 
 /*When player come into this scene, start game immediately*/
 void MainGame::startGame() {
-
+	randomTetris();
 }
 
-void MainGame::randomTetris(bool cur)
+void MainGame::randomTetris()
 {
 	int rand = CCRANDOM_0_1()*(TSTYLE - 1);
 	for (int i = 0; i < TNUM; i++) {
 		Sprite* block = Sprite::create("block.png");
 		nextTetris[i] = block;
 		addChild(block);
+		auto testsize = block->getContentSize();
+		int a = 0;
 	}
 	switch (rand) {
 	case 0: //I
