@@ -64,6 +64,11 @@ void MainGame::initUI() {
 	addChild(bg);
 	auto testsize = bg->getContentSize();
 	int i = 0;
+
+	// vertical line
+	Sprite* verticalLine = Sprite::create("vertical_line.png");
+	addChild(verticalLine);
+	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, (950 / 2)));
 }
 
 
@@ -74,6 +79,7 @@ void MainGame::startGame() {
 
 void MainGame::randomTetris()
 {
+	srand(time(nullptr));
 	int rand = CCRANDOM_0_1()*(TSTYLE - 1);
 	for (int i = 0; i < TNUM; i++) {
 		Sprite* block = Sprite::create("block.png");
@@ -84,46 +90,46 @@ void MainGame::randomTetris()
 	}
 	switch (rand) {
 	case 0: //I
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 5));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
 		break;
 	case 1: //L
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 6));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
 		break;
 	case 2: //J
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 6));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
 		break;
 	case 3: //Z
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 8));
 		break;
 	case 4: //S
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 6));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 5));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 6));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 5));
 		break;
 	case 5: //O
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 8));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
 		break;
 	case 6: //T
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 2, BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
 		break;
 	default:
 		break;
