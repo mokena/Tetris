@@ -68,15 +68,18 @@ void MainGame::initUI() {
 	// vertical line
 	Sprite* verticalLine = Sprite::create("vertical_line.png");
 	addChild(verticalLine);
-	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, (950 / 2)));
+	verticalLine->setAnchorPoint(Vec2(0, 0));
+	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, 5));
 }
 
 
-/*When player come into this scene, start game immediately*/
+/* When player come into this scene, start game immediately*/
 void MainGame::startGame() {
 	randomTetris();
+	nextToCur();
 }
 
+/* Generate the next tetris units by random */
 void MainGame::randomTetris()
 {
 	srand(time(nullptr));
@@ -85,8 +88,7 @@ void MainGame::randomTetris()
 		Sprite* block = Sprite::create("block.png");
 		nextTetris[i] = block;
 		addChild(block);
-		auto testsize = block->getContentSize();
-		int a = 0;
+		nextTetris[i]->setAnchorPoint(Vec2(0, 0));
 	}
 	switch (rand) {
 	case 0: //I
@@ -136,11 +138,16 @@ void MainGame::randomTetris()
 	}
 }
 
+/* Turn the next tetris to current dropping tetris */
 void MainGame::nextToCur()
 {
 	for (int i = 0; i < TNUM; i++) {
 		curTetris[i] = nextTetris[i];
+		Vec2 pos = curTetris[i]->getPosition();
+		curTetris[i]->setPosition(Vec2(pos.x - 7 * BLOCKW, pos.y + 9 * BLOCKW));
 	}
+
+	randomTetris();
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
