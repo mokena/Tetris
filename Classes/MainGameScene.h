@@ -34,6 +34,7 @@ public:
 	void startGame();
 	void randomTetris();
 	void nextToCur();
+	void moveUpdate(float dt);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

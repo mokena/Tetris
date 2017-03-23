@@ -75,14 +75,16 @@ void MainGame::initUI() {
 
 /* When player come into this scene, start game immediately*/
 void MainGame::startGame() {
+	srand(time(nullptr));
 	randomTetris();
 	nextToCur();
+	schedule(schedule_selector(MainGame::moveUpdate), 0.5f);
 }
 
 /* Generate the next tetris units by random */
 void MainGame::randomTetris()
 {
-	srand(time(nullptr));
+	//
 	int rand = CCRANDOM_0_1()*(TSTYLE - 1);
 	for (int i = 0; i < TNUM; i++) {
 		Sprite* block = Sprite::create("block.png");
@@ -148,6 +150,14 @@ void MainGame::nextToCur()
 	}
 
 	randomTetris();
+}
+
+void MainGame::moveUpdate(float dt)
+{
+	for (int i = 0; i < TNUM; i++) {
+		Vec2 pos = curTetris[i]->getPosition();
+		curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
+	}
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
