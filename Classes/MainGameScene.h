@@ -9,6 +9,10 @@ static const int ROW = 20;
 static const int TNUM = 4;
 static const int TSTYLE = 7;
 static const float BLOCKW = 45.0f;
+//static const int DIRECTION_UP = 0;
+static const int DIRECTION_DOWN = 1;
+static const int DIRECTION_LEFT = 2;
+static const int DIRECTION_RIGHT = 3;
 
 class MainGame : public cocos2d::Layer
 {
@@ -32,9 +36,18 @@ public:
 
 	void initUI();
 	void startGame();
+
+	// generate the next blocks randomly
 	void randomTetris();
+
+	// make the next blocks to be the current ones
 	void nextToCur();
+
+	// make the current blocks falls when game started
 	void moveUpdate(float dt);
+
+	// touch check
+	boolean touchCheck(int direction);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

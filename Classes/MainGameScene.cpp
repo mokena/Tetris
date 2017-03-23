@@ -152,12 +152,41 @@ void MainGame::nextToCur()
 	randomTetris();
 }
 
+/* when game started, move the current blocks */
 void MainGame::moveUpdate(float dt)
+{
+	if (touchCheck(DIRECTION_DOWN)) {
+		for (int i = 0; i < TNUM; i++) {
+			Vec2 pos = curTetris[i]->getPosition();
+			curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
+		}
+	}
+}
+
+/* when game started, check the current blocks is touching 
+   other motionless blocks or the walls, if can move on, return
+   true, otherwise return false */
+boolean MainGame::touchCheck(int direction)
 {
 	for (int i = 0; i < TNUM; i++) {
 		Vec2 pos = curTetris[i]->getPosition();
-		curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
+		switch (direction) {
+		/*case DIRECTION_UP:
+			break;*/
+		case DIRECTION_DOWN:
+			if (pos.y - BLOCKW < 0) return false;
+			break;
+		case DIRECTION_LEFT:
+			if (pos.x - BLOCKW < 0) return false;
+			break;
+		case DIRECTION_RIGHT:
+			if (pos.x + BLOCKW > (10 * BLOCKW + 2)) return false;
+			break;
+		default:
+			break;
+		}
 	}
+	return true;
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
