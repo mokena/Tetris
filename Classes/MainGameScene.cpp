@@ -161,6 +161,17 @@ void MainGame::moveUpdate(float dt)
 			curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
 		}
 	}
+	else {
+		// add all current blocks to all blocks array
+		for (int i = 0; i < TNUM; i++) {
+			Vec2 pos = curTetris[i]->getPosition();
+			int column = (int)(pos.x / BLOCKW);
+			int row = (int)(pos.y / BLOCKW);
+			allBlocks[column][row] = curTetris[i];
+		}
+
+		nextToCur();
+	}
 }
 
 /* when game started, check the current blocks is touching 
@@ -170,10 +181,12 @@ boolean MainGame::touchCheck(int direction)
 {
 	for (int i = 0; i < TNUM; i++) {
 		Vec2 pos = curTetris[i]->getPosition();
+		int row = 0, column = 0;
 		switch (direction) {
-		/*case DIRECTION_UP:
-			break;*/
 		case DIRECTION_DOWN:
+			row = (int)((pos.y - BLOCKW) / BLOCKW);
+			column = (int)(pos.x / BLOCKW);
+			if (row < ROW && allBlocks[column][row] != nullptr) return false;
 			if (pos.y - BLOCKW < 0) return false;
 			break;
 		case DIRECTION_LEFT:
