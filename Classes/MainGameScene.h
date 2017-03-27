@@ -4,6 +4,8 @@
 #include "cocos2d.h"
 USING_NS_CC;
 
+static const int GAME_WIDTH = 640;
+static const int GAME_HEIGHT = 960;
 static const int COLUMN = 10;
 static const int ROW = 20;
 static const int TNUM = 4;
@@ -17,7 +19,7 @@ static const int DIRECTION_RIGHT = 3;
 class MainGame : public cocos2d::Layer
 {
 private:	
-	Sprite* allBlocks[ROW][COLUMN];
+	Sprite* allBlocks[COLUMN][ROW];
 	Sprite* curTetris[TNUM];
 	Sprite* nextTetris[TNUM];
 	float blockWidth, blockHeight;
@@ -48,6 +50,9 @@ public:
 
 	// touch check
 	boolean touchCheck(int direction);
+
+	// check weither game over
+	boolean gameOverCheck();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

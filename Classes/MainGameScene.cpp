@@ -58,7 +58,7 @@ void MainGame::initUI() {
 	}
 
 	// background
-	Sprite* bg = Sprite::create("bg.png");
+	Sprite* bg = Sprite::create("bg-1.png");
 	bg->setAnchorPoint(Vec2(0, 0));
 	bg->setPosition(ccp(0, 0));
 	addChild(bg);
@@ -94,46 +94,46 @@ void MainGame::randomTetris()
 	}
 	switch (rand) {
 	case 0: //I
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 5));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
 		break;
 	case 1: //L
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 6));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
 		break;
 	case 2: //J
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 6));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
 		break;
 	case 3: //Z
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
 		break;
 	case 4: //S
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 6));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 6));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 5));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 6));
 		break;
 	case 5: //O
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 8));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
 		break;
 	case 6: //T
-		nextTetris[0]->setPosition(ccp(640 - BLOCKW * 4, 960 - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(640 - BLOCKW * 2, 960 - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(640 - BLOCKW * 3, 960 - BLOCKW * 8));
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
 		break;
 	default:
 		break;
@@ -146,7 +146,7 @@ void MainGame::nextToCur()
 	for (int i = 0; i < TNUM; i++) {
 		curTetris[i] = nextTetris[i];
 		Vec2 pos = curTetris[i]->getPosition();
-		curTetris[i]->setPosition(Vec2(pos.x - 7 * BLOCKW, pos.y + 9 * BLOCKW));
+		curTetris[i]->setPosition(Vec2(pos.x - 7 * BLOCKW - 10, pos.y + 9 * BLOCKW));
 	}
 
 	randomTetris();
@@ -168,9 +168,15 @@ void MainGame::moveUpdate(float dt)
 			int column = (int)(pos.x / BLOCKW);
 			int row = (int)(pos.y / BLOCKW);
 			allBlocks[column][row] = curTetris[i];
+			log("%d, %d added.", column, row);
 		}
 
-		nextToCur();
+		// check game over
+		if (!gameOverCheck()) {
+			nextToCur();
+		}
+		else {
+		}
 	}
 }
 
@@ -186,8 +192,13 @@ boolean MainGame::touchCheck(int direction)
 		case DIRECTION_DOWN:
 			row = (int)((pos.y - BLOCKW) / BLOCKW);
 			column = (int)(pos.x / BLOCKW);
-			if (row < ROW && allBlocks[column][row] != nullptr) return false;
-			if (pos.y - BLOCKW < 0) return false;
+			
+			if (row < ROW && allBlocks[column][row] != nullptr) {
+				return false;
+			}
+			if (pos.y - BLOCKW < 0) {
+				return false;
+			}
 			break;
 		case DIRECTION_LEFT:
 			if (pos.x - BLOCKW < 0) return false;
@@ -200,6 +211,17 @@ boolean MainGame::touchCheck(int direction)
 		}
 	}
 	return true;
+}
+
+/* check if the game is over */
+boolean MainGame::gameOverCheck() {
+	for (int i = 0; i < TNUM; i++) {
+		Vec2 pos = curTetris[i]->getPosition();
+		if (pos.y > GAME_HEIGHT) {
+			return true;
+		}
+	}
+	return false;
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
