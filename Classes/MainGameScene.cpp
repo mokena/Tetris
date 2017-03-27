@@ -58,9 +58,9 @@ void MainGame::initUI() {
 	}
 
 	// background
-	Sprite* bg = Sprite::create("bg-1.png");
+	Sprite* bg = Sprite::create("bg_1.png");
 	bg->setAnchorPoint(Vec2(0, 0));
-	bg->setPosition(ccp(0, 0));
+	bg->setPosition(Vec2(0, 0));
 	addChild(bg);
 	auto testsize = bg->getContentSize();
 	int i = 0;
@@ -70,6 +70,31 @@ void MainGame::initUI() {
 	addChild(verticalLine);
 	verticalLine->setAnchorPoint(Vec2(0, 0));
 	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, 5));
+
+	// keys 
+	upBtn = ui::Button::create("key_red.png");
+	upBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
+	upBtn->setPosition(Vec2(550, GAME_HEIGHT - 760));
+	addChild(upBtn);
+	upBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickUp, this));
+
+	downBtn = ui::Button::create("key_red.png");
+	downBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
+	downBtn->setPosition(Vec2(550, GAME_HEIGHT - 860));
+	addChild(downBtn);
+	downBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickDown, this));
+
+	leftBtn = ui::Button::create("key_black.png");
+	leftBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
+	leftBtn->setPosition(Vec2(500, GAME_HEIGHT - 810));
+	addChild(leftBtn);
+	leftBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickLeft, this));
+
+	rightBtn = ui::Button::create("key_black.png");
+	rightBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
+	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 810));
+	addChild(rightBtn);
+	rightBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickRight, this));
 }
 
 
@@ -196,15 +221,27 @@ boolean MainGame::touchCheck(int direction)
 			if (row < ROW && allBlocks[column][row] != nullptr) {
 				return false;
 			}
-			if (pos.y - BLOCKW < 0) {
+			if (pos.y - BLOCKW <= 0) {
 				return false;
 			}
 			break;
 		case DIRECTION_LEFT:
+			row = (int)(pos.y / BLOCKW);
+			column = (int)((pos.x - BLOCKW) / BLOCKW);
+
+			if (column >= 0 && allBlocks[column][row] != nullptr) {
+				return false;
+			}
 			if (pos.x - BLOCKW < 0) return false;
 			break;
 		case DIRECTION_RIGHT:
-			if (pos.x + BLOCKW > (10 * BLOCKW + 2)) return false;
+			row = (int)(pos.y / BLOCKW);
+			column = (int)((pos.x + BLOCKW) / BLOCKW);
+
+			if (column < COLUMN && allBlocks[column][row] != nullptr) {
+				return false;
+			}
+			if (pos.x + BLOCKW >= (10 * BLOCKW)) return false;
 			break;
 		default:
 			break;
@@ -222,6 +259,36 @@ boolean MainGame::gameOverCheck() {
 		}
 	}
 	return false;
+}
+
+void MainGame::clickUp(Ref* ref) {
+}
+
+void MainGame::clickDown(Ref* ref) {
+	if (touchCheck(DIRECTION_DOWN)) {
+		for (int i = 0; i < TNUM; i++) {
+			Vec2 pos = curTetris[i]->getPosition();
+			curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
+		}
+	}
+}
+
+void MainGame::clickLeft(Ref* ref) {
+	if (touchCheck(DIRECTION_LEFT)) {
+		for (int i = 0; i < TNUM; i++) {
+			Vec2 pos = curTetris[i]->getPosition();
+			curTetris[i]->setPosition(Vec2(pos.x - 1 * BLOCKW, pos.y));
+		}
+	}
+}
+
+void MainGame::clickRight(Ref* ref) {
+	if (touchCheck(DIRECTION_RIGHT)) {
+		for (int i = 0; i < TNUM; i++) {
+			Vec2 pos = curTetris[i]->getPosition();
+			curTetris[i]->setPosition(Vec2(pos.x + 1 * BLOCKW, pos.y));
+		}
+	}
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)

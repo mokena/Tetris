@@ -2,6 +2,7 @@
 #define __HELLOWORLD_SCENE_H__
 
 #include "cocos2d.h"
+#include "ui/CocosGUI.h"
 USING_NS_CC;
 
 static const int GAME_WIDTH = 640;
@@ -24,6 +25,7 @@ private:
 	Sprite* nextTetris[TNUM];
 	float blockWidth, blockHeight;
 	float rightAreaWidth;
+	ui::Button *upBtn, *downBtn, *leftBtn, *rightBtn;
 
 public:
     static cocos2d::Scene* createScene();
@@ -53,6 +55,11 @@ public:
 
 	// check weither game over
 	boolean gameOverCheck();
+
+	void clickUp(Ref* ref);
+	void clickDown(Ref* ref);
+	void clickLeft(Ref* ref);
+	void clickRight(Ref* ref);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
