@@ -17,6 +17,21 @@ static const int DIRECTION_DOWN = 1;
 static const int DIRECTION_LEFT = 2;
 static const int DIRECTION_RIGHT = 3;
 
+// tetrominos
+static const int TETROMINO_I = 0;
+static const int TETROMINO_O = 1;
+static const int TETROMINO_T = 2;
+static const int TETROMINO_S = 3;
+static const int TETROMINO_Z = 4; 
+static const int TETROMINO_J = 5;
+static const int TETROMINO_L = 6;
+
+// tetromino directions 
+static const int TETROMINO_DIRECTION_UP = 0;
+static const int TETROMINO_DIRECTION_DOWN = 1;
+static const int TETROMINO_DIRECTION_LEFT = 2;
+static const int TETROMINO_DIRECTION_RIGHT = 3;
+
 class MainGame : public cocos2d::Layer
 {
 private:	
@@ -26,6 +41,8 @@ private:
 	float blockWidth, blockHeight;
 	float rightAreaWidth;
 	ui::Button *upBtn, *downBtn, *leftBtn, *rightBtn;
+	int tetrominoType = 0;
+	int tetrominoDirection = 0;
 
 public:
     static cocos2d::Scene* createScene();
@@ -60,6 +77,14 @@ public:
 	void clickDown(Ref* ref);
 	void clickLeft(Ref* ref);
 	void clickRight(Ref* ref);
+
+	void turnTetrominoI();
+	void turnTetrominoO();
+	void turnTetrominoT();
+	void turnTetrominoS();
+	void turnTetrominoZ();
+	void turnTetrominoJ();
+	void turnTetrominoL();
 };
 
 #endif // __HELLOWORLD_SCENE_H__

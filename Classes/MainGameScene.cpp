@@ -117,48 +117,49 @@ void MainGame::randomTetris()
 		addChild(block);
 		nextTetris[i]->setAnchorPoint(Vec2(0, 0));
 	}
-	switch (rand) {
-	case 0: //I
+	tetrominoType = rand;
+	switch (tetrominoType) {
+	case TETROMINO_I: //I
 		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 6));
 		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
 		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
 		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
 		break;
-	case 1: //L
+	case TETROMINO_O: //O
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		break;
+	case TETROMINO_T: //T
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		break;
+	case TETROMINO_S: //S
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 6));
+		break;
+	case TETROMINO_Z: //Z
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
+		break;
+	case TETROMINO_J: //J
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
+		break;
+	case TETROMINO_L: //L
 		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
 		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
 		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
 		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
-		break;
-	case 2: //J
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
-		break;
-	case 3: //Z
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
-		break;
-	case 4: //S
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 6));
-		break;
-	case 5: //O
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
-		break;
-	case 6: //T
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
 		break;
 	default:
 		break;
@@ -262,6 +263,31 @@ boolean MainGame::gameOverCheck() {
 }
 
 void MainGame::clickUp(Ref* ref) {
+	switch (tetrominoType) {
+	case TETROMINO_I: //I
+		turnTetrominoI();
+		break;
+	case TETROMINO_O: //O
+		turnTetrominoO();
+		break;
+	case TETROMINO_T: //T
+		turnTetrominoT();
+		break;
+	case TETROMINO_S: //S
+		turnTetrominoS();
+		break;
+	case TETROMINO_Z: //Z
+		turnTetrominoZ();
+		break;
+	case TETROMINO_J: //J
+		turnTetrominoJ();
+		break;
+	case TETROMINO_L: //L
+		turnTetrominoL();
+		break;
+	default:
+		break;
+	}
 }
 
 void MainGame::clickDown(Ref* ref) {
@@ -289,6 +315,21 @@ void MainGame::clickRight(Ref* ref) {
 			curTetris[i]->setPosition(Vec2(pos.x + 1 * BLOCKW, pos.y));
 		}
 	}
+}
+
+void MainGame::turnTetrominoI() {
+}
+void MainGame::turnTetrominoO() {
+}
+void MainGame::turnTetrominoT() {
+}
+void MainGame::turnTetrominoS() {
+}
+void MainGame::turnTetrominoZ() {
+}
+void MainGame::turnTetrominoJ() {
+}
+void MainGame::turnTetrominoL() {
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
