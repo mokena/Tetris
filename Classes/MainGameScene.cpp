@@ -317,19 +317,167 @@ void MainGame::clickRight(Ref* ref) {
 	}
 }
 
+// rotate tetrmino "I"
 void MainGame::turnTetrominoI() {
+	Vec2 pos = curTetris[0]->getPosition();
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+		pos = curTetris[0]->getPosition();
+		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y - BLOCKW));
+		pos = curTetris[1]->getPosition();
+		curTetris[1]->setPosition(ccp(pos.x + BLOCKW * 1, pos.y));
+		pos = curTetris[2]->getPosition();
+		curTetris[2]->setPosition(ccp(pos.x, pos.y - BLOCKW));
+		pos = curTetris[3]->getPosition();
+		curTetris[3]->setPosition(ccp(pos.x - BLOCKW, pos.y - BLOCKW * 2));
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+		pos = curTetris[0]->getPosition();
+		curTetris[0]->setPosition(ccp(pos.x + BLOCKW, pos.y - BLOCKW * 2));
+		pos = curTetris[1]->getPosition();
+		curTetris[1]->setPosition(ccp(pos.x, pos.y - BLOCKW));
+		pos = curTetris[2]->getPosition();
+		curTetris[2]->setPosition(ccp(pos.x - BLOCKW, pos.y));
+		pos = curTetris[3]->getPosition();
+		curTetris[3]->setPosition(ccp(pos.x - BLOCKW * 2, pos.y + BLOCKW));
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left
+		pos = curTetris[0]->getPosition();
+		curTetris[0]->setPosition(ccp(pos.x - BLOCKW * 2, pos.y - BLOCKW));
+		pos = curTetris[1]->getPosition();
+		curTetris[1]->setPosition(ccp(pos.x - BLOCKW, pos.y));
+		pos = curTetris[2]->getPosition();
+		curTetris[2]->setPosition(ccp(pos.x, pos.y + BLOCKW));
+		pos = curTetris[3]->getPosition();
+		curTetris[3]->setPosition(ccp(pos.x + BLOCKW, pos.y + BLOCKW * 2));
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up ...
+		pos = curTetris[0]->getPosition();
+		curTetris[0]->setPosition(ccp(pos.x - BLOCKW, pos.y + BLOCKW * 2));
+		pos = curTetris[1]->getPosition();
+		curTetris[1]->setPosition(ccp(pos.x, pos.y + BLOCKW));
+		pos = curTetris[2]->getPosition();
+		curTetris[2]->setPosition(ccp(pos.x + BLOCKW, pos.y));
+		pos = curTetris[3]->getPosition();
+		curTetris[3]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y - BLOCKW));
+		break;
+	default:
+		break;
+	}
 }
+
+// rotate tetrmino "O"
 void MainGame::turnTetrominoO() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
+
+// rotate tetrmino "T"
 void MainGame::turnTetrominoT() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
+
+// rotate tetrmino "S"
 void MainGame::turnTetrominoS() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
 void MainGame::turnTetrominoZ() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
 void MainGame::turnTetrominoJ() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
 void MainGame::turnTetrominoL() {
+	switch (tetrominoDirection) {
+	case TETROMINO_DIRECTION_UP: // go to right
+
+		break;
+	case TETROMINO_DIRECTION_DOWN: // go to left 
+
+		break;
+	case TETROMINO_DIRECTION_LEFT: // go to up
+
+		break;
+	case TETROMINO_DIRECTION_RIGHT: // go to down
+
+		break;
+	default:
+		break;
+	}
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
