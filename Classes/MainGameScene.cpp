@@ -109,27 +109,21 @@ void MainGame::startGame() {
 /* Generate the next tetris units by random */
 void MainGame::randomTetris()
 {
-	//
-	int rand = CCRANDOM_0_1()*(TSTYLE - 1);
+	tetrominoType = CCRANDOM_0_1()*(TSTYLE - 1);
 	for (int i = 0; i < TNUM; i++) {
 		Sprite* block = Sprite::create("block.png");
 		nextTetris[i] = block;
 		addChild(block);
 		nextTetris[i]->setAnchorPoint(Vec2(0, 0));
 	}
-	tetrominoType = rand;
+	
+	tetrominoDirection = CCRANDOM_0_1()*TETROMINO_DIRECTION_RIGHT;
 	switch (tetrominoType) {
 	case TETROMINO_I: //I
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 6));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
+		nextTetrominoI(tetrominoDirection);
 		break;
 	case TETROMINO_O: //O
-		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
-		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
-		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetrominoO(tetrominoDirection);
 		break;
 	case TETROMINO_T: //T
 		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
@@ -160,6 +154,114 @@ void MainGame::randomTetris()
 		nextTetris[1]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
 		nextTetris[2]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 9));
 		nextTetris[3]->setPosition(ccp(GAME_WIDTH  - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
+		break;
+	default:
+		break;
+	}
+}
+
+/* generate next tetromino */
+void MainGame::nextTetrominoI(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 6));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 6));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 1, GAME_HEIGHT - BLOCKW * 6));
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 6));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 9));
+		break; 
+	case TETROMINO_DIRECTION_DOWN:
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 1, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 2, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+		break;
+	case TETROMINO_DIRECTION_LEFT:
+		nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 9));
+		nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+		nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+		nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 6));
+		break;
+	default:
+		break;
+	}
+}
+void MainGame::nextTetrominoO(int direction) {
+	nextTetris[0]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 7));
+	nextTetris[1]->setPosition(ccp(GAME_WIDTH - BLOCKW * 4, GAME_HEIGHT - BLOCKW * 8));
+	nextTetris[2]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 7));
+	nextTetris[3]->setPosition(ccp(GAME_WIDTH - BLOCKW * 3, GAME_HEIGHT - BLOCKW * 8));
+}
+void MainGame::nextTetrominoT(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		break;
+	case TETROMINO_DIRECTION_DOWN:
+		break;
+	case TETROMINO_DIRECTION_LEFT:
+		break;
+	default:
+		break;
+	}
+}
+void MainGame::nextTetrominoS(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		break;
+	case TETROMINO_DIRECTION_DOWN:
+		break;
+	case TETROMINO_DIRECTION_LEFT:
+		break;
+	default:
+		break;
+	}
+}
+void MainGame::nextTetrominoZ(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		break;
+	case TETROMINO_DIRECTION_DOWN:
+		break;
+	case TETROMINO_DIRECTION_LEFT:
+		break;
+	default:
+		break;
+	}
+}
+void MainGame::nextTetrominoJ(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		break;
+	case TETROMINO_DIRECTION_DOWN:
+		break;
+	case TETROMINO_DIRECTION_LEFT:
+		break;
+	default:
+		break;
+	}
+}
+void MainGame::nextTetrominoL(int direction) {
+	switch (direction) {
+	case TETROMINO_DIRECTION_UP:
+		break;
+	case TETROMINO_DIRECTION_RIGHT:
+		break;
+	case TETROMINO_DIRECTION_DOWN:
+		break;
+	case TETROMINO_DIRECTION_LEFT:
 		break;
 	default:
 		break;

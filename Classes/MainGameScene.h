@@ -81,6 +81,16 @@ public:
 	void clickLeft(Ref* ref);
 	void clickRight(Ref* ref);
 
+	// generate next tetromino
+	void nextTetrominoI(int direction);
+	void nextTetrominoO(int direction);
+	void nextTetrominoT(int direction);
+	void nextTetrominoS(int direction);
+	void nextTetrominoZ(int direction);
+	void nextTetrominoJ(int direction);
+	void nextTetrominoL(int direction);
+
+	// rotate current tetromino
 	void turnTetrominoI();
 	void turnTetrominoO();
 	void turnTetrominoT();
