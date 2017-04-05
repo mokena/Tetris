@@ -40,7 +40,10 @@ private:
 	Sprite* nextTetris[TNUM];
 	float blockWidth, blockHeight;
 	float rightAreaWidth;
-	ui::Button *upBtn, *downBtn, *leftBtn, *rightBtn;
+	ui::Button *upBtn;
+	ui::Button* downBtn;
+	ui::Button* leftBtn;
+	ui::Button* rightBtn;
 	int tetrominoType = 0;
 	int tetrominoDirection = 0;
 
