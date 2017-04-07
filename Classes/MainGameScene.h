@@ -44,8 +44,10 @@ private:
 	ui::Button* downBtn;
 	ui::Button* leftBtn;
 	ui::Button* rightBtn;
-	int tetrominoType = 0;
-	int tetrominoDirection = 0;
+	int curTetrominoType = 0;
+	int nextTetrominoType = 0;
+	int curTetrominoDirection = 0;
+	int nextTetrominoDirection = 0;
 
 public:
     static cocos2d::Scene* createScene();

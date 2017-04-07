@@ -109,7 +109,7 @@ void MainGame::startGame() {
 /* Generate the next tetris units by random */
 void MainGame::randomTetris()
 {
-	tetrominoType = CCRANDOM_0_1()*(TSTYLE - 1);
+	nextTetrominoType = CCRANDOM_0_1()*(TSTYLE - 1);
 	for (int i = 0; i < TNUM; i++) {
 		Sprite* block = Sprite::create("block.png");
 		nextTetris[i] = block;
@@ -117,28 +117,28 @@ void MainGame::randomTetris()
 		nextTetris[i]->setAnchorPoint(Vec2(0, 0));
 	}
 	
-	tetrominoDirection = CCRANDOM_0_1()*TETROMINO_DIRECTION_RIGHT;
-	switch (tetrominoType) {
+	nextTetrominoDirection = CCRANDOM_0_1()*TETROMINO_DIRECTION_RIGHT;
+	switch (nextTetrominoType) {
 	case TETROMINO_I: //I
-		nextTetrominoI(tetrominoDirection);
+		nextTetrominoI(nextTetrominoDirection);
 		break;
 	case TETROMINO_O: //O
-		nextTetrominoO(tetrominoDirection);
+		nextTetrominoO(nextTetrominoDirection);
 		break;
 	case TETROMINO_T: //T
-		nextTetrominoT(tetrominoDirection);
+		nextTetrominoT(nextTetrominoDirection);
 		break;
 	case TETROMINO_S: //S
-		nextTetrominoS(tetrominoDirection);
+		nextTetrominoS(nextTetrominoDirection);
 		break;
 	case TETROMINO_Z: //Z
-		nextTetrominoZ(tetrominoDirection);
+		nextTetrominoZ(nextTetrominoDirection);
 		break;
 	case TETROMINO_J: //J
-		nextTetrominoJ(tetrominoDirection);
+		nextTetrominoJ(nextTetrominoDirection);
 		break;
 	case TETROMINO_L: //L
-		nextTetrominoL(tetrominoDirection);
+		nextTetrominoL(nextTetrominoDirection);
 		break;
 	default:
 		break;
@@ -336,6 +336,8 @@ void MainGame::nextTetrominoL(int direction) {
 /* Turn the next tetris to current dropping tetris */
 void MainGame::nextToCur()
 {
+	curTetrominoType = nextTetrominoType;
+	curTetrominoDirection = nextTetrominoDirection;
 	for (int i = 0; i < TNUM; i++) {
 		curTetris[i] = nextTetris[i];
 		Vec2 pos = curTetris[i]->getPosition();
@@ -430,7 +432,7 @@ boolean MainGame::gameOverCheck() {
 }
 
 void MainGame::clickUp(Ref* ref) {
-	switch (tetrominoType) {
+	switch (curTetrominoType) {
 	case TETROMINO_I: //I
 		turnTetrominoI();
 		break;
@@ -454,6 +456,10 @@ void MainGame::clickUp(Ref* ref) {
 		break;
 	default:
 		break;
+	}
+	curTetrominoDirection++;
+	if (curTetrominoDirection > TETROMINO_L) {
+		curTetrominoDirection = TETROMINO_I;
 	}
 }
 
@@ -487,7 +493,7 @@ void MainGame::clickRight(Ref* ref) {
 // rotate tetrmino "I"
 void MainGame::turnTetrominoI() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y - BLOCKW));
@@ -535,7 +541,7 @@ void MainGame::turnTetrominoI() {
 
 // rotate tetrmino "O"
 void MainGame::turnTetrominoO() {
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		break;
 	case TETROMINO_DIRECTION_DOWN: // go to left 
@@ -552,7 +558,7 @@ void MainGame::turnTetrominoO() {
 // rotate tetrmino "T"
 void MainGame::turnTetrominoT() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x + BLOCKW, pos.y + BLOCKW));
@@ -593,7 +599,7 @@ void MainGame::turnTetrominoT() {
 // rotate tetrmino "S"
 void MainGame::turnTetrominoS() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x, pos.y + BLOCKW * 2));
@@ -627,7 +633,7 @@ void MainGame::turnTetrominoS() {
 }
 void MainGame::turnTetrominoZ() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y));
@@ -666,7 +672,7 @@ void MainGame::turnTetrominoZ() {
 }
 void MainGame::turnTetrominoJ() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y));
@@ -705,7 +711,7 @@ void MainGame::turnTetrominoJ() {
 }
 void MainGame::turnTetrominoL() {
 	Vec2 pos = curTetris[0]->getPosition();
-	switch (tetrominoDirection) {
+	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x + BLOCKW, pos.y + BLOCKW));
