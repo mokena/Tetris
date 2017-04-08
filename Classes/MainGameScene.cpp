@@ -117,7 +117,7 @@ void MainGame::randomTetris()
 		nextTetris[i]->setAnchorPoint(Vec2(0, 0));
 	}
 	
-	nextTetrominoDirection = CCRANDOM_0_1()*TETROMINO_DIRECTION_RIGHT;
+	nextTetrominoDirection = CCRANDOM_0_1()*TETROMINO_DIRECTION_LEFT;
 	switch (nextTetrominoType) {
 	case TETROMINO_I: //I
 		nextTetrominoI(nextTetrominoDirection);
@@ -363,7 +363,6 @@ void MainGame::moveUpdate(float dt)
 			int column = (int)(pos.x / BLOCKW);
 			int row = (int)(pos.y / BLOCKW);
 			allBlocks[column][row] = curTetris[i];
-			log("%d, %d added.", column, row);
 		}
 
 		// check game over
@@ -458,8 +457,8 @@ void MainGame::clickUp(Ref* ref) {
 		break;
 	}
 	curTetrominoDirection++;
-	if (curTetrominoDirection > TETROMINO_L) {
-		curTetrominoDirection = TETROMINO_I;
+	if (curTetrominoDirection > TETROMINO_DIRECTION_LEFT) {
+		curTetrominoDirection = TETROMINO_DIRECTION_UP;
 	}
 }
 
@@ -496,7 +495,7 @@ void MainGame::turnTetrominoI() {
 	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
-		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y - BLOCKW));
+		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y + BLOCKW));
 		pos = curTetris[1]->getPosition();
 		curTetris[1]->setPosition(ccp(pos.x + BLOCKW * 1, pos.y));
 		pos = curTetris[2]->getPosition();
@@ -602,7 +601,7 @@ void MainGame::turnTetrominoS() {
 	switch (curTetrominoDirection) {
 	case TETROMINO_DIRECTION_UP: // go to right
 		pos = curTetris[0]->getPosition();
-		curTetris[0]->setPosition(ccp(pos.x, pos.y + BLOCKW * 2));
+		curTetris[0]->setPosition(ccp(pos.x, pos.y - BLOCKW * 2));
 		pos = curTetris[1]->getPosition();
 		curTetris[1]->setPosition(ccp(pos.x + BLOCKW, pos.y - BLOCKW));
 		pos = curTetris[3]->getPosition();
@@ -612,20 +611,25 @@ void MainGame::turnTetrominoS() {
 		pos = curTetris[0]->getPosition();
 		curTetris[0]->setPosition(ccp(pos.x - BLOCKW * 2, pos.y));
 		pos = curTetris[1]->getPosition();
-		curTetris[1]->setPosition(ccp(pos.x - BLOCKW, pos.y + BLOCKW));
+		curTetris[1]->setPosition(ccp(pos.x - BLOCKW, pos.y - BLOCKW));
 		pos = curTetris[3]->getPosition();
 		curTetris[3]->setPosition(ccp(pos.x + BLOCKW, pos.y - BLOCKW));
 		break;
-	case TETROMINO_DIRECTION_DOWN: // go to left ...
+	case TETROMINO_DIRECTION_DOWN: // go to left
 		pos = curTetris[0]->getPosition();
-		curTetris[0]->setPosition(ccp(pos.x - BLOCKW * 2, pos.y));
+		curTetris[0]->setPosition(ccp(pos.x, pos.y + BLOCKW * 2));
 		pos = curTetris[1]->getPosition();
 		curTetris[1]->setPosition(ccp(pos.x - BLOCKW, pos.y + BLOCKW));
 		pos = curTetris[3]->getPosition();
-		curTetris[3]->setPosition(ccp(pos.x + BLOCKW, pos.y - BLOCKW));
+		curTetris[3]->setPosition(ccp(pos.x - BLOCKW, pos.y - BLOCKW));
 		break;
 	case TETROMINO_DIRECTION_LEFT: // go to up
-		
+		pos = curTetris[0]->getPosition();
+		curTetris[0]->setPosition(ccp(pos.x + BLOCKW * 2, pos.y));
+		pos = curTetris[1]->getPosition();
+		curTetris[1]->setPosition(ccp(pos.x + BLOCKW, pos.y + BLOCKW));
+		pos = curTetris[3]->getPosition();
+		curTetris[3]->setPosition(ccp(pos.x - BLOCKW, pos.y + BLOCKW));
 		break;
 	default:
 		break;

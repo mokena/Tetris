@@ -28,9 +28,9 @@ static const int TETROMINO_L = 6;
 
 // tetromino directions 
 static const int TETROMINO_DIRECTION_UP = 0;
-static const int TETROMINO_DIRECTION_DOWN = 1;
-static const int TETROMINO_DIRECTION_LEFT = 2;
-static const int TETROMINO_DIRECTION_RIGHT = 3;
+static const int TETROMINO_DIRECTION_RIGHT = 1;
+static const int TETROMINO_DIRECTION_DOWN = 2;
+static const int TETROMINO_DIRECTION_LEFT = 3;
 
 class MainGame : public cocos2d::Layer
 {
