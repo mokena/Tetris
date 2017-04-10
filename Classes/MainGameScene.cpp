@@ -432,7 +432,20 @@ void MainGame::dimissLine() {
 			}
 		}
 		if (j >= COLUMN) {
-			
+			for (j = 0; j < COLUMN; j++) {
+				allBlocks[i][j] = nullptr;
+			}
+		}
+	}
+
+	for (int i = 0; i < ROW; i++) {
+		for (int j = 0; j < COLUMN - 1; j++) {
+			if (allBlocks[i][j] != nullptr && allBlocks[i][j+1] == nullptr) {
+				allBlocks[i][j + 1] = allBlocks[i][j];
+				allBlocks[i][j + 1]->setPosition(Vec2(allBlocks[i][j + 1]->getPositionX(),
+					allBlocks[i][j + 1]->getPositionY() - BLOCKW));
+				allBlocks[i][j] = nullptr;
+			}
 		}
 	}
 }
