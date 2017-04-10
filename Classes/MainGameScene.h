@@ -72,8 +72,11 @@ public:
 	// make the current blocks falls when game started
 	void moveUpdate(float dt);
 
-	// touch check
+	// when touch move, check the weither the tetrimino touched boundary
 	boolean touchCheck(int direction);
+
+	// dismiss a line when the line is full of blocks
+	void dimissLine();
 
 	// check weither game over
 	boolean gameOverCheck();

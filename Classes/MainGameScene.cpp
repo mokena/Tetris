@@ -365,6 +365,9 @@ void MainGame::moveUpdate(float dt)
 			allBlocks[column][row] = curTetris[i];
 		}
 
+		// dismiss a line 
+		dimissLine();
+
 		// check game over
 		if (!gameOverCheck()) {
 			nextToCur();
@@ -417,6 +420,21 @@ boolean MainGame::touchCheck(int direction)
 		}
 	}
 	return true;
+}
+
+/* enum all the blocks, when there is a line full of blocks, dismiss the line */
+void MainGame::dimissLine() {
+	for (int i = 0; i < ROW; i++) {
+		int j = 0;
+		for (j = 0; j < COLUMN; j++) {
+			if (allBlocks[i][j] == nullptr) {
+				continue;
+			}
+		}
+		if (j >= COLUMN) {
+			
+		}
+	}
 }
 
 /* check if the game is over */
