@@ -35,7 +35,7 @@ static const int TETROMINO_DIRECTION_LEFT = 3;
 class MainGame : public cocos2d::Layer
 {
 private:	
-	Sprite* allBlocks[COLUMN][ROW];
+	Sprite* allBlocks[ROW][COLUMN];
 	Sprite* curTetris[TNUM];
 	Sprite* nextTetris[TNUM];
 	float blockWidth, blockHeight;
@@ -76,7 +76,7 @@ public:
 	boolean touchCheck(int direction);
 
 	// dismiss a line when the line is full of blocks
-	void dimissLine();
+	void dismissLine();
 
 	// check weither game over
 	boolean gameOverCheck();

@@ -46,7 +46,7 @@ void MainGame::initUI() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	blockWidth = blockHeight = BLOCKW;
 
-	for (int i = 0; i < ROW; i++) {
+	/*for (int i = 0; i < ROW; i++) {
 		for (int j = 0; j < COLUMN; j++) {
 			allBlocks[i][j] = nullptr;
 		}
@@ -55,7 +55,7 @@ void MainGame::initUI() {
 	for (int i = 0; i < TNUM; i++) {
 		curTetris[i] = nullptr;
 		nextTetris[i] = nullptr;
-	}
+	}*/
 
 	// background
 	Sprite* bg = Sprite::create("bg1.png");
@@ -100,7 +100,7 @@ void MainGame::initUI() {
 
 /* When player come into this scene, start game immediately*/
 void MainGame::startGame() {
-	srand(time(nullptr));
+	srand(time(NULL));
 	randomTetris();
 	nextToCur();
 	schedule(schedule_selector(MainGame::moveUpdate), 0.5f);
@@ -362,11 +362,11 @@ void MainGame::moveUpdate(float dt)
 			Vec2 pos = curTetris[i]->getPosition();
 			int column = (int)(pos.x / BLOCKW);
 			int row = (int)(pos.y / BLOCKW);
-			allBlocks[column][row] = curTetris[i];
+			allBlocks[row][column] = curTetris[i];
 		}
 
 		// dismiss a line 
-		dimissLine();
+		dismissLine();
 
 		// check game over
 		if (!gameOverCheck()) {
@@ -390,7 +390,7 @@ boolean MainGame::touchCheck(int direction)
 			row = (int)((pos.y - BLOCKW) / BLOCKW);
 			column = (int)(pos.x / BLOCKW);
 			
-			if (row < ROW && allBlocks[column][row] != nullptr) {
+			if (row < ROW && allBlocks[row][column] != NULL) {
 				return false;
 			}
 			if (pos.y - BLOCKW <= 0) {
@@ -401,7 +401,7 @@ boolean MainGame::touchCheck(int direction)
 			row = (int)(pos.y / BLOCKW);
 			column = (int)((pos.x - BLOCKW) / BLOCKW);
 
-			if (column >= 0 && allBlocks[column][row] != nullptr) {
+			if (column >= 0 && allBlocks[row][column] != NULL) {
 				return false;
 			}
 			if (pos.x - BLOCKW < 0) return false;
@@ -410,7 +410,7 @@ boolean MainGame::touchCheck(int direction)
 			row = (int)(pos.y / BLOCKW);
 			column = (int)((pos.x + BLOCKW) / BLOCKW);
 
-			if (column < COLUMN && allBlocks[column][row] != nullptr) {
+			if (column < COLUMN && allBlocks[row][column] != NULL) {
 				return false;
 			}
 			if (pos.x + BLOCKW >= (10 * BLOCKW)) return false;
@@ -423,31 +423,37 @@ boolean MainGame::touchCheck(int direction)
 }
 
 /* enum all the blocks, when there is a line full of blocks, dismiss the line */
-void MainGame::dimissLine() {
+void MainGame::dismissLine() {
+	int dismissedCount = -1;
+	int dismissedLines[4] = {-1};
 	for (int i = 0; i < ROW; i++) {
 		int j = 0;
 		for (j = 0; j < COLUMN; j++) {
-			if (allBlocks[i][j] == nullptr) {
-				continue;
+			if (allBlocks[i][j] == NULL) {
+				break;
 			}
+			CCLOG("not null, %d, %d", i, j);
 		}
 		if (j >= COLUMN) {
+			dismissedCount++;
+			dismissedLines[dismissedCount] = i;
 			for (j = 0; j < COLUMN; j++) {
-				allBlocks[i][j] = nullptr;
+				allBlocks[i][j] = NULL;
 			}
 		}
 	}
-
-	for (int i = 0; i < ROW; i++) {
-		for (int j = 0; j < COLUMN - 1; j++) {
-			if (allBlocks[i][j] != nullptr && allBlocks[i][j+1] == nullptr) {
-				allBlocks[i][j + 1] = allBlocks[i][j];
-				allBlocks[i][j + 1]->setPosition(Vec2(allBlocks[i][j + 1]->getPositionX(),
-					allBlocks[i][j + 1]->getPositionY() - BLOCKW));
-				allBlocks[i][j] = nullptr;
+	for (int i = 0; i <= dismissedCount; i++) {
+		for (int j = 1; j < COLUMN; j++) {
+			int row = dismissedLines[i];
+			if (allBlocks[row][j] != NULL && allBlocks[row - 1][j] == NULL) {
+				allBlocks[row - 1][j] = allBlocks[row][j];
+				allBlocks[i][j - 1]->setPosition(Vec2(allBlocks[i][j - 1]->getPositionX(),
+					allBlocks[i][j - 1]->getPositionY() - BLOCKW));
+				allBlocks[i][j] = NULL;
 			}
 		}
 	}
+	
 }
 
 /* check if the game is over */
