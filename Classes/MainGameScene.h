@@ -13,9 +13,9 @@ static const int TNUM = 4;
 static const int TSTYLE = 7;
 static const float BLOCKW = 45.0f;
 //static const int DIRECTION_UP = 0;
-static const int DIRECTION_DOWN = 1;
-static const int DIRECTION_LEFT = 2;
-static const int DIRECTION_RIGHT = 3;
+static const int MOVE_DIRECTION_DOWN = 1;
+static const int MOVE_DIRECTION_LEFT = 2;
+static const int MOVE_DIRECTION_RIGHT = 3;
 
 // tetrominos
 static const int TETROMINO_I = 0;

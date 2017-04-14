@@ -350,7 +350,7 @@ void MainGame::nextToCur()
 /* when game started, move the current blocks */
 void MainGame::moveUpdate(float dt)
 {
-	if (touchCheck(DIRECTION_DOWN)) {
+	if (touchCheck(MOVE_DIRECTION_DOWN)) {
 		for (int i = 0; i < TNUM; i++) {
 			Vec2 pos = curTetris[i]->getPosition();
 			curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
@@ -369,10 +369,11 @@ void MainGame::moveUpdate(float dt)
 		dismissLine();
 
 		// check game over
-		if (!gameOverCheck()) {
-			nextToCur();
-		}
-		else {
+		nextToCur();
+		if (gameOverCheck()) {
+			// show game over
+
+			unschedule(schedule_selector(MainGame::moveUpdate));
 		}
 	}
 }
@@ -386,7 +387,7 @@ boolean MainGame::touchCheck(int direction)
 		Vec2 pos = curTetris[i]->getPosition();
 		int row = 0, column = 0;
 		switch (direction) {
-		case DIRECTION_DOWN:
+		case MOVE_DIRECTION_DOWN:
 			row = (int)((pos.y - BLOCKW) / BLOCKW);
 			column = (int)(pos.x / BLOCKW);
 			
@@ -397,7 +398,7 @@ boolean MainGame::touchCheck(int direction)
 				return false;
 			}
 			break;
-		case DIRECTION_LEFT:
+		case MOVE_DIRECTION_LEFT:
 			row = (int)(pos.y / BLOCKW);
 			column = (int)((pos.x - BLOCKW) / BLOCKW);
 
@@ -406,7 +407,7 @@ boolean MainGame::touchCheck(int direction)
 			}
 			if (pos.x - BLOCKW < 0) return false;
 			break;
-		case DIRECTION_RIGHT:
+		case MOVE_DIRECTION_RIGHT:
 			row = (int)(pos.y / BLOCKW);
 			column = (int)((pos.x + BLOCKW) / BLOCKW);
 
@@ -438,33 +439,41 @@ void MainGame::dismissLine() {
 			dismissedCount++;
 			dismissedLines[dismissedCount] = i;
 			for (j = 0; j < COLUMN; j++) {
+				allBlocks[i][j]->removeFromParent();
 				allBlocks[i][j] = NULL;
 			}
 		}
 	}
 	for (int i = 0; i <= dismissedCount; i++) {
-		for (int j = 1; j < COLUMN; j++) {
-			int row = dismissedLines[i];
-			if (allBlocks[row][j] != NULL && allBlocks[row - 1][j] == NULL) {
-				allBlocks[row - 1][j] = allBlocks[row][j];
-				allBlocks[i][j - 1]->setPosition(Vec2(allBlocks[i][j - 1]->getPositionX(),
-					allBlocks[i][j - 1]->getPositionY() - BLOCKW));
-				allBlocks[i][j] = NULL;
+		int row = dismissedLines[i];
+		for (row; row < ROW - 1; row++) {
+			for (int j = 0; j < COLUMN; j++) {
+				if (allBlocks[row][j] == NULL && allBlocks[row + 1][j] != NULL) {
+					allBlocks[row][j] = allBlocks[row + 1][j];
+					allBlocks[row][j]->setPosition(Vec2(allBlocks[row][j]->getPositionX(),
+						allBlocks[row][j]->getPositionY() - BLOCKW));
+					allBlocks[row + 1][j] = NULL;
+				}
 			}
 		}
 	}
-	
 }
 
 /* check if the game is over */
 boolean MainGame::gameOverCheck() {
-	for (int i = 0; i < TNUM; i++) {
-		Vec2 pos = curTetris[i]->getPosition();
-		if (pos.y > GAME_HEIGHT) {
-			return true;
-		}
+	if (touchCheck(MOVE_DIRECTION_DOWN)) {
+		return false;
 	}
-	return false;
+	else {
+		return true;
+	}
+	//for (int i = 0; i < TNUM; i++) {
+	//	Vec2 pos = curTetris[i]->getPosition();
+	//	if (pos.y > GAME_HEIGHT) {
+	//		return true;
+	//	}
+	//}
+	//return false;
 }
 
 void MainGame::clickUp(Ref* ref) {
@@ -500,7 +509,7 @@ void MainGame::clickUp(Ref* ref) {
 }
 
 void MainGame::clickDown(Ref* ref) {
-	if (touchCheck(DIRECTION_DOWN)) {
+	if (touchCheck(MOVE_DIRECTION_DOWN)) {
 		for (int i = 0; i < TNUM; i++) {
 			Vec2 pos = curTetris[i]->getPosition();
 			curTetris[i]->setPosition(Vec2(pos.x, pos.y - 1 * BLOCKW));
@@ -509,7 +518,7 @@ void MainGame::clickDown(Ref* ref) {
 }
 
 void MainGame::clickLeft(Ref* ref) {
-	if (touchCheck(DIRECTION_LEFT)) {
+	if (touchCheck(MOVE_DIRECTION_LEFT)) {
 		for (int i = 0; i < TNUM; i++) {
 			Vec2 pos = curTetris[i]->getPosition();
 			curTetris[i]->setPosition(Vec2(pos.x - 1 * BLOCKW, pos.y));
@@ -518,7 +527,7 @@ void MainGame::clickLeft(Ref* ref) {
 }
 
 void MainGame::clickRight(Ref* ref) {
-	if (touchCheck(DIRECTION_RIGHT)) {
+	if (touchCheck(MOVE_DIRECTION_RIGHT)) {
 		for (int i = 0; i < TNUM; i++) {
 			Vec2 pos = curTetris[i]->getPosition();
 			curTetris[i]->setPosition(Vec2(pos.x + 1 * BLOCKW, pos.y));
