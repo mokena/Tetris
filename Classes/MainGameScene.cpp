@@ -46,17 +46,6 @@ void MainGame::initUI() {
 	auto visibleSize = Director::getInstance()->getVisibleSize();
 	blockWidth = blockHeight = BLOCKW;
 
-	/*for (int i = 0; i < ROW; i++) {
-		for (int j = 0; j < COLUMN; j++) {
-			allBlocks[i][j] = nullptr;
-		}
-	}
-
-	for (int i = 0; i < TNUM; i++) {
-		curTetris[i] = nullptr;
-		nextTetris[i] = nullptr;
-	}*/
-
 	// background
 	Sprite* bg = Sprite::create("bg1.png");
 	bg->setAnchorPoint(Vec2(0, 0));
@@ -70,6 +59,15 @@ void MainGame::initUI() {
 	addChild(verticalLine);
 	verticalLine->setAnchorPoint(Vec2(0, 0));
 	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, 5));
+
+	// score
+	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 25);
+	addChild(scoreTitle);
+	scoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 50));
+
+	scoreLbl = LabelTTF::create("0", "arial", 25);
+	addChild(scoreLbl);
+	scoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 100));
 
 	// keys 
 	upBtn = ui::Button::create("keyRed.png");
@@ -444,7 +442,7 @@ void MainGame::dismissLine() {
 			}
 		}
 	}
-	for (int i = 0; i <= dismissedCount; i++) {
+	for (int i = dismissedCount; i >= 0; i--) {
 		int row = dismissedLines[i];
 		for (row; row < ROW - 1; row++) {
 			for (int j = 0; j < COLUMN; j++) {
@@ -457,6 +455,19 @@ void MainGame::dismissLine() {
 			}
 		}
 	}
+	if (dismissedCount == 0) {
+		score += 10;
+	}
+	else if (dismissedCount == 1) {
+		score += 30;
+	}
+	else if (dismissedCount == 2) {
+		score += 60;
+	}
+	else if (dismissedCount == 3) {
+		score += 100;
+	}
+	scoreLbl->setString(String::createWithFormat("%d", score)->getCString());
 }
 
 /* check if the game is over */

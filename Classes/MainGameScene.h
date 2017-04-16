@@ -48,6 +48,9 @@ private:
 	int nextTetrominoType = 0;
 	int curTetrominoDirection = 0;
 	int nextTetrominoDirection = 0;
+	int score = 0;
+	LabelTTF* scoreLbl;
+	LabelTTF* highScoreLbl;
 
 public:
     static cocos2d::Scene* createScene();
