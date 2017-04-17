@@ -31,11 +31,14 @@ bool MainGame::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-	//Layout UI
+    // Param init
+	level = 0;
+	score = 0;
+
+	// Layout UI
 	initUI();
 
-	//Start game
+	// Start game
 	startGame();
     
     return true;
@@ -51,8 +54,6 @@ void MainGame::initUI() {
 	bg->setAnchorPoint(Vec2(0, 0));
 	bg->setPosition(Vec2(0, 0));
 	addChild(bg);
-	auto testsize = bg->getContentSize();
-	int i = 0;
 
 	// vertical line
 	Sprite* verticalLine = Sprite::create("verticalLine.png");
@@ -423,19 +424,19 @@ boolean MainGame::touchCheck(int direction)
 
 /* enum all the blocks, when there is a line full of blocks, dismiss the line */
 void MainGame::dismissLine() {
-	int dismissedCount = -1;
-	int dismissedLines[4] = {-1};
+	int dismissedCount = -1; // current dismissed lines count, max is 4
+	int dismissedLn[4] = {-1};
 	for (int i = 0; i < ROW; i++) {
 		int j = 0;
 		for (j = 0; j < COLUMN; j++) {
 			if (allBlocks[i][j] == NULL) {
 				break;
 			}
-			CCLOG("not null, %d, %d", i, j);
 		}
 		if (j >= COLUMN) {
 			dismissedCount++;
-			dismissedLines[dismissedCount] = i;
+			dismissedLines++; // total dismissed lines count of one game
+			dismissedLn[dismissedCount] = i;
 			for (j = 0; j < COLUMN; j++) {
 				allBlocks[i][j]->removeFromParent();
 				allBlocks[i][j] = NULL;
@@ -443,7 +444,7 @@ void MainGame::dismissLine() {
 		}
 	}
 	for (int i = dismissedCount; i >= 0; i--) {
-		int row = dismissedLines[i];
+		int row = dismissedLn[i];
 		for (row; row < ROW - 1; row++) {
 			for (int j = 0; j < COLUMN; j++) {
 				if (allBlocks[row][j] == NULL && allBlocks[row + 1][j] != NULL) {
@@ -456,18 +457,26 @@ void MainGame::dismissLine() {
 		}
 	}
 	if (dismissedCount == 0) {
-		score += 10;
+		score += 40 * (level + 1);
 	}
 	else if (dismissedCount == 1) {
-		score += 30;
+		score += 100 * (level + 1);
 	}
 	else if (dismissedCount == 2) {
-		score += 60;
+		score += 300 * (level + 1);
 	}
 	else if (dismissedCount == 3) {
-		score += 100;
+		score += 1200 * (level + 1);
 	}
 	scoreLbl->setString(String::createWithFormat("%d", score)->getCString());
+}
+
+void MainGame::upgrade()
+{
+	level = dismissedLines / 10;
+
+	// change speed
+
 }
 
 /* check if the game is over */

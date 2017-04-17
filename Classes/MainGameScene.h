@@ -35,22 +35,32 @@ static const int TETROMINO_DIRECTION_LEFT = 3;
 class MainGame : public cocos2d::Layer
 {
 private:	
+	// blocks 
 	Sprite* allBlocks[ROW][COLUMN];
 	Sprite* curTetris[TNUM];
 	Sprite* nextTetris[TNUM];
+
+	// width and height
 	float blockWidth, blockHeight;
 	float rightAreaWidth;
+	
+	// control button
 	ui::Button *upBtn;
 	ui::Button* downBtn;
 	ui::Button* leftBtn;
 	ui::Button* rightBtn;
+	
+	// tetromino type and direction
 	int curTetrominoType = 0;
 	int nextTetrominoType = 0;
 	int curTetrominoDirection = 0;
 	int nextTetrominoDirection = 0;
-	int score = 0;
+
+	// score and level
+	int score = 0, level = 0, dismissedLines = 0;
 	LabelTTF* scoreLbl;
 	LabelTTF* highScoreLbl;
+	LabelTTF* levelLbl;
 
 public:
     static cocos2d::Scene* createScene();
@@ -80,6 +90,9 @@ public:
 
 	// dismiss a line when the line is full of blocks
 	void dismissLine();
+
+	// adjust level and speed by current score
+	void upgrade();
 
 	// check weither game over
 	boolean gameOverCheck();
