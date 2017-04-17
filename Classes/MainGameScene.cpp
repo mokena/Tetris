@@ -469,6 +469,7 @@ void MainGame::dismissLine() {
 		score += 1200 * (level + 1);
 	}
 	scoreLbl->setString(String::createWithFormat("%d", score)->getCString());
+	upgrade();
 }
 
 void MainGame::upgrade()
@@ -476,7 +477,8 @@ void MainGame::upgrade()
 	level = dismissedLines / 10;
 
 	// change speed
-
+	unschedule(schedule_selector(MainGame::moveUpdate));
+	schedule(schedule_selector(MainGame::moveUpdate), (0.5f - 0.5f*level/5));
 }
 
 /* check if the game is over */
