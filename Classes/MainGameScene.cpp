@@ -361,7 +361,9 @@ void MainGame::moveUpdate(float dt)
 			Vec2 pos = curTetris[i]->getPosition();
 			int column = (int)(pos.x / BLOCKW);
 			int row = (int)(pos.y / BLOCKW);
-			allBlocks[row][column] = curTetris[i];
+			if (row < ROW) {
+				allBlocks[row][column] = curTetris[i];
+			}
 		}
 
 		// dismiss a line 
@@ -371,7 +373,6 @@ void MainGame::moveUpdate(float dt)
 		nextToCur();
 		if (gameOverCheck()) {
 			// show game over
-
 			unschedule(schedule_selector(MainGame::moveUpdate));
 		}
 	}
@@ -390,7 +391,8 @@ boolean MainGame::touchCheck(int direction)
 			row = (int)((pos.y - BLOCKW) / BLOCKW);
 			column = (int)(pos.x / BLOCKW);
 			
-			if (row < ROW && allBlocks[row][column] != NULL) {
+			if ((row < ROW && allBlocks[row][column] != NULL) ||
+				(row >= ROW && allBlocks[ROW - 1][column] != NULL)) {
 				return false;
 			}
 			if (pos.y - BLOCKW <= 0) {
