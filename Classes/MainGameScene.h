@@ -57,6 +57,7 @@ private:
 	int nextTetrominoDirection = 0;
 
 	// score and level
+	const char* HIGH_SCORE = "height_score";
 	int score = 0, level = 0, dismissedLines = 0;
 	LabelTTF* scoreLbl;
 	LabelTTF* highScoreLbl;

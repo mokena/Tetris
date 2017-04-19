@@ -62,13 +62,33 @@ void MainGame::initUI() {
 	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, 5));
 
 	// score
-	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 25);
+	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 20);
 	addChild(scoreTitle);
-	scoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 50));
+	scoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 20));
 
-	scoreLbl = LabelTTF::create("0", "arial", 25);
+	scoreLbl = LabelTTF::create("0", "arial", 20);
 	addChild(scoreLbl);
-	scoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 100));
+	scoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 50));
+
+	// hight score
+	LabelTTF* highScoreTitle = LabelTTF::create("High score", "arial", 20);
+	addChild(highScoreTitle);
+	highScoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 80));
+
+	highScoreLbl = LabelTTF::create("0", "arial", 20);
+	addChild(highScoreLbl);
+	highScoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 110));
+	int highS = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE, 0);
+	highScoreLbl->setString(String::createWithFormat("%d", highS)->getCString());
+
+	// level 
+	LabelTTF* levelTitle = LabelTTF::create("Level", "arial", 20);
+	addChild(levelTitle);
+	levelTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 150));
+
+	levelLbl = LabelTTF::create("0", "arial", 20);
+	addChild(levelLbl);
+	levelLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 190));
 
 	// keys 
 	upBtn = ui::Button::create("keyRed.png");
@@ -477,6 +497,7 @@ void MainGame::dismissLine() {
 void MainGame::upgrade()
 {
 	level = dismissedLines / 10;
+	levelLbl->setString(String::createWithFormat("%d", level)->getCString());
 
 	// change speed
 	unschedule(schedule_selector(MainGame::moveUpdate));
@@ -489,6 +510,11 @@ boolean MainGame::gameOverCheck() {
 		return false;
 	}
 	else {
+		int highS = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE, 0);
+		if (score > highS) {
+			highScoreLbl->setString(String::createWithFormat("%d", score)->getCString());
+			UserDefault::getInstance()->setIntegerForKey(HIGH_SCORE, score);
+		}
 		return true;
 	}
 	//for (int i = 0; i < TNUM; i++) {
