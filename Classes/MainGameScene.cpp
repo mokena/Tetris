@@ -401,7 +401,7 @@ void MainGame::moveUpdate(float dt)
 /* when game started, check the current blocks is touching 
    other motionless blocks or the walls, if can move on, return
    true, otherwise return false */
-boolean MainGame::touchCheck(int direction)
+bool MainGame::touchCheck(int direction)
 {
 	for (int i = 0; i < TNUM; i++) {
 		Vec2 pos = curTetris[i]->getPosition();
@@ -505,7 +505,7 @@ void MainGame::upgrade()
 }
 
 /* check if the game is over */
-boolean MainGame::gameOverCheck() {
+bool MainGame::gameOverCheck() {
 	if (touchCheck(MOVE_DIRECTION_DOWN)) {
 		return false;
 	}

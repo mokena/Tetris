@@ -87,7 +87,7 @@ public:
 	void moveUpdate(float dt);
 
 	// when touch move, check the weither the tetrimino touched boundary
-	boolean touchCheck(int direction);
+	bool touchCheck(int direction);
 
 	// dismiss a line when the line is full of blocks
 	void dismissLine();
@@ -96,7 +96,7 @@ public:
 	void upgrade();
 
 	// check weither game over
-	boolean gameOverCheck();
+	bool gameOverCheck();
 
 	void clickUp(Ref* ref);
 	void clickDown(Ref* ref);
