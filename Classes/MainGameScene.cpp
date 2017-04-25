@@ -114,6 +114,12 @@ void MainGame::initUI() {
 	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 810));
 	addChild(rightBtn);
 	rightBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickRight, this));
+
+	pauseBtn = ui::Button::create("keyBlack.png");
+	pauseBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
+	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 900));
+	addChild(pauseBtn);
+	pauseBtn->addClickEventListener(CC_CALLBACK_1(MainGame::pause, this));
 }
 
 
@@ -502,6 +508,15 @@ void MainGame::upgrade()
 	// change speed
 	unschedule(schedule_selector(MainGame::moveUpdate));
 	schedule(schedule_selector(MainGame::moveUpdate), (0.5f - 0.5f*level/5));
+}
+
+void MainGame::pause(Ref* ref) {
+	if (paused) {
+		schedule(schedule_selector(MainGame::moveUpdate), (0.5f - 0.5f*level / 5));
+	}
+	else {
+		unschedule(schedule_selector(MainGame::moveUpdate));
+	}
 }
 
 /* check if the game is over */

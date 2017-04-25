@@ -49,6 +49,7 @@ private:
 	ui::Button* downBtn;
 	ui::Button* leftBtn;
 	ui::Button* rightBtn;
+	ui::Button* pauseBtn;
 	
 	// tetromino type and direction
 	int curTetrominoType = 0;
@@ -62,6 +63,7 @@ private:
 	LabelTTF* scoreLbl;
 	LabelTTF* highScoreLbl;
 	LabelTTF* levelLbl;
+	bool paused;
 
 public:
     static cocos2d::Scene* createScene();
@@ -97,6 +99,9 @@ public:
 
 	// check weither game over
 	bool gameOverCheck();
+
+	// pause game
+	void pause(Ref* ref);
 
 	void clickUp(Ref* ref);
 	void clickDown(Ref* ref);
