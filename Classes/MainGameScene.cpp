@@ -55,11 +55,12 @@ void MainGame::initUI() {
 	bg->setPosition(Vec2(0, 0));
 	addChild(bg);
 
-	// vertical line
-	/*Sprite* verticalLine = Sprite::create("verticalLine.png");
-	addChild(verticalLine);
-	verticalLine->setAnchorPoint(Vec2(0, 0));
-	verticalLine->setPosition(Vec2(10 * BLOCKW + 2, 5));*/
+	// up frame
+	Sprite* upFrame = Sprite::create("up.png");
+	addChild(upFrame);
+	upFrame->setAnchorPoint(Vec2(0, 1));
+	upFrame->setPosition(Vec2(0, GAME_HEIGHT));
+	upFrame->setZOrder(1);
 
 	// score
 	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 20);
@@ -93,31 +94,31 @@ void MainGame::initUI() {
 	// keys 
 	upBtn = ui::Button::create("keyRed.png");
 	upBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	upBtn->setPosition(Vec2(550, GAME_HEIGHT - 740));
+	upBtn->setPosition(Vec2(550, GAME_HEIGHT - 720));
 	addChild(upBtn);
 	upBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickUp, this));
 
 	downBtn = ui::Button::create("keyRed.png");
 	downBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	downBtn->setPosition(Vec2(550, GAME_HEIGHT - 840));
+	downBtn->setPosition(Vec2(550, GAME_HEIGHT - 820));
 	addChild(downBtn);
 	downBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickDown, this));
 
 	leftBtn = ui::Button::create("keyBlack.png");
 	leftBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	leftBtn->setPosition(Vec2(500, GAME_HEIGHT - 790));
+	leftBtn->setPosition(Vec2(500, GAME_HEIGHT - 770));
 	addChild(leftBtn);
 	leftBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickLeft, this));
 
 	rightBtn = ui::Button::create("keyBlack.png");
 	rightBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 790));
+	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 770));
 	addChild(rightBtn);
 	rightBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickRight, this));
 
 	pauseBtn = ui::Button::create("pause.png");
 	pauseBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 900));
+	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 880));
 	addChild(pauseBtn);
 	pauseBtn->addClickEventListener(CC_CALLBACK_1(MainGame::pause, this));
 }

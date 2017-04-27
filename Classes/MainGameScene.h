@@ -7,8 +7,8 @@ USING_NS_CC;
 
 static const int GAME_WIDTH = 660;
 static const int GAME_HEIGHT = 922;
-static const int GAME_W_GAP = 7;
-static const int GAME_H_GAP = 8;
+static const float GAME_W_GAP = 9;
+static const float GAME_H_GAP = 10;
 static const int COLUMN = 10;
 static const int ROW = 20;
 static const int TNUM = 4;
