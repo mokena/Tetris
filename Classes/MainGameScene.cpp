@@ -65,60 +65,60 @@ void MainGame::initUI() {
 	// score
 	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 20);
 	addChild(scoreTitle);
-	scoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 30));
+	scoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 40));
 
 	scoreLbl = LabelTTF::create("0", "arial", 20);
 	addChild(scoreLbl);
-	scoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 60));
+	scoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 75));
 
 	// hight score
 	LabelTTF* highScoreTitle = LabelTTF::create("High score", "arial", 20);
 	addChild(highScoreTitle);
-	highScoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 90));
+	highScoreTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 105));
 
 	highScoreLbl = LabelTTF::create("0", "arial", 20);
 	addChild(highScoreLbl);
-	highScoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 120));
+	highScoreLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 135));
 	int highS = UserDefault::getInstance()->getIntegerForKey(HIGH_SCORE, 0);
 	highScoreLbl->setString(String::createWithFormat("%d", highS)->getCString());
 
 	// level 
 	LabelTTF* levelTitle = LabelTTF::create("Level", "arial", 20);
 	addChild(levelTitle);
-	levelTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 160));
+	levelTitle->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 165));
 
 	levelLbl = LabelTTF::create("0", "arial", 20);
 	addChild(levelLbl);
-	levelLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 200));
+	levelLbl->setPosition(Vec2(GAME_WIDTH - 100, GAME_HEIGHT - 195));
 
 	// keys 
 	upBtn = ui::Button::create("keyRed.png");
 	upBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	upBtn->setPosition(Vec2(550, GAME_HEIGHT - 720));
+	upBtn->setPosition(Vec2(550, GAME_HEIGHT - 760));
 	addChild(upBtn);
 	upBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickUp, this));
 
 	downBtn = ui::Button::create("keyRed.png");
 	downBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	downBtn->setPosition(Vec2(550, GAME_HEIGHT - 820));
+	downBtn->setPosition(Vec2(550, GAME_HEIGHT - 860));
 	addChild(downBtn);
 	downBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickDown, this));
 
 	leftBtn = ui::Button::create("keyBlack.png");
 	leftBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	leftBtn->setPosition(Vec2(500, GAME_HEIGHT - 770));
+	leftBtn->setPosition(Vec2(500, GAME_HEIGHT - 810));
 	addChild(leftBtn);
 	leftBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickLeft, this));
 
 	rightBtn = ui::Button::create("keyBlack.png");
 	rightBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 770));
+	rightBtn->setPosition(Vec2(600, GAME_HEIGHT - 810));
 	addChild(rightBtn);
 	rightBtn->addClickEventListener(CC_CALLBACK_1(MainGame::clickRight, this));
 
 	pauseBtn = ui::Button::create("pause.png");
 	pauseBtn->setAnchorPoint(Vec2(0.5f, 0.5f));
-	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 880));
+	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 650));
 	addChild(pauseBtn);
 	pauseBtn->addClickEventListener(CC_CALLBACK_1(MainGame::pause, this));
 }
