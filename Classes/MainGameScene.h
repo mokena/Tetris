@@ -78,6 +78,7 @@ public:
     // implement the "static create()" method manually
     CREATE_FUNC(MainGame);
 
+	void initParam();
 	void initUI();
 	void startGame();
 
@@ -127,6 +128,10 @@ public:
 	void turnTetrominoZ();
 	void turnTetrominoJ();
 	void turnTetrominoL();
+
+	// exit and restart callback
+	void menuExitCallback(cocos2d::Ref* pSender);
+	void menuRestartCallback(cocos2d::Ref* pSender);
 };
 
 #endif // __HELLOWORLD_SCENE_H__

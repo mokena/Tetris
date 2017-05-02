@@ -32,8 +32,7 @@ bool MainGame::init()
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
     // Param init
-	level = 0;
-	score = 0;
+	initParam();
 
 	// Layout UI
 	initUI();
@@ -42,6 +41,20 @@ bool MainGame::init()
 	startGame();
     
     return true;
+}
+
+void MainGame::initParam() {
+	level = 0;
+	score = 0;
+
+	for (int i = 0; i < COLUMN; i++) {
+		for (int j = 0; j < ROW; j++) {
+			if (allBlocks[i][j] != NULL) {
+				allBlocks[i][j]->removeFromParent();
+				allBlocks[i][j] = NULL;
+			}
+		}
+	}
 }
 
 /*Initiate the UI and layout*/
@@ -121,6 +134,23 @@ void MainGame::initUI() {
 	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 650));
 	addChild(pauseBtn);
 	pauseBtn->addClickEventListener(CC_CALLBACK_1(MainGame::pause, this));
+
+	// exit and restart 
+	auto exitLbl = LabelTTF::create("Exit Game", "arial", 30);
+	auto menuItemExit = MenuItemLabel::create(exitLbl, 
+		CC_CALLBACK_1(MainGame::menuExitCallback, this));
+	menuItemExit->setPosition(Vec2(visibleSize.width - menuItemExit->getContentSize().width / 2,
+		menuItemExit->getContentSize().height / 2 - 50));
+
+	auto restartLbl = LabelTTF::create("Try Again!", "arial", 30);
+	auto menuItemRestart = MenuItemLabel::create(restartLbl,
+		CC_CALLBACK_1(MainGame::menuRestartCallback, this));
+	menuItemExit->setPosition(Vec2(visibleSize.width - menuItemExit->getContentSize().width / 2,
+		menuItemExit->getContentSize().height / 2));
+
+	auto menu = Menu::create(menuItemRestart, menuItemExit, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 1);
 }
 
 
@@ -879,6 +909,27 @@ void MainGame::turnTetrominoL() {
 	default:
 		break;
 	}
+}
+
+void MainGame::menuExitCallback(Ref* pSender)
+{
+	Director::getInstance()->end();
+
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	exit(0);
+#endif
+}
+
+void MainGame::menuRestartCallback(Ref* pSender)
+{
+	// Param init
+	initParam();
+
+	// Layout UI
+	initUI();
+
+	// Start game
+	startGame();
 }
 
 void MainGame::menuCloseCallback(Ref* pSender)
