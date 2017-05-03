@@ -1,5 +1,5 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __MAINGAME_SCENE_H__
+#define __MAINGAME_SCENE_H__
 
 #include "cocos2d.h"
 #include "ui/CocosGUI.h"
@@ -136,4 +136,4 @@ public:
 	void menuRestartCallback(cocos2d::Ref* pSender);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif 

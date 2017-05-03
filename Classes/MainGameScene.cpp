@@ -28,8 +28,7 @@ bool MainGame::init()
         return false;
     }
     
-    auto visibleSize = Director::getInstance()->getVisibleSize();
-    Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	srand(time(NULL));
 
     // Param init
 	initParam();
@@ -49,10 +48,17 @@ void MainGame::initParam() {
 
 	for (int i = 0; i < COLUMN; i++) {
 		for (int j = 0; j < ROW; j++) {
-			if (allBlocks[i][j] != NULL) {
-				allBlocks[i][j]->removeFromParent();
-				allBlocks[i][j] = NULL;
+			if (allBlocks[j][i] != NULL) {
+				allBlocks[j][i]->removeFromParent();
+				allBlocks[j][i] = NULL;
 			}
+		}
+	}
+
+	for (int i = 0; i < TNUM; i++) {
+		if (nextTetris[i] != NULL) {
+			nextTetris[i]->removeFromParent();
+			nextTetris[i] = NULL;
 		}
 	}
 }
@@ -74,6 +80,25 @@ void MainGame::initUI() {
 	upFrame->setAnchorPoint(Vec2(0, 1));
 	upFrame->setPosition(Vec2(0, GAME_HEIGHT));
 	upFrame->setZOrder(1);
+
+	// exit and restart 
+	auto exitLbl = LabelTTF::create("Exit Game", "arial", 30);
+	menuItemExit = MenuItemLabel::create(exitLbl,
+		CC_CALLBACK_1(MainGame::menuExitCallback, this));
+	menuItemExit->setPosition(Vec2(visibleSize.width / 2 - menuItemExit->getContentSize().width / 2,
+		visibleSize.height / 2 - menuItemExit->getContentSize().height / 2 - 50));
+	menuItemExit->setVisible(false);
+
+	auto restartLbl = LabelTTF::create("Try Again!", "arial", 30);
+	menuItemRestart = MenuItemLabel::create(restartLbl,
+		CC_CALLBACK_1(MainGame::menuRestartCallback, this));
+	menuItemRestart->setPosition(Vec2(visibleSize.width / 2 - menuItemRestart->getContentSize().width / 2,
+		visibleSize.height / 2 - menuItemRestart->getContentSize().height / 2));
+	menuItemRestart->setVisible(false);
+
+	auto menu = Menu::create(menuItemRestart, menuItemExit, NULL);
+	menu->setPosition(Vec2::ZERO);
+	this->addChild(menu, 2);
 
 	// score
 	LabelTTF* scoreTitle = LabelTTF::create("Score", "arial", 20);
@@ -134,31 +159,13 @@ void MainGame::initUI() {
 	pauseBtn->setPosition(Vec2(550, GAME_HEIGHT - 650));
 	addChild(pauseBtn);
 	pauseBtn->addClickEventListener(CC_CALLBACK_1(MainGame::pause, this));
-
-	// exit and restart 
-	auto exitLbl = LabelTTF::create("Exit Game", "arial", 30);
-	menuItemExit = MenuItemLabel::create(exitLbl, 
-		CC_CALLBACK_1(MainGame::menuExitCallback, this));
-	menuItemExit->setPosition(Vec2(visibleSize.width - menuItemExit->getContentSize().width / 2,
-		menuItemExit->getContentSize().height / 2 - 50));
-	menuItemExit->setVisible(false);
-
-	auto restartLbl = LabelTTF::create("Try Again!", "arial", 30);
-	menuItemRestart = MenuItemLabel::create(restartLbl,
-		CC_CALLBACK_1(MainGame::menuRestartCallback, this));
-	menuItemRestart->setPosition(Vec2(visibleSize.width - menuItemRestart->getContentSize().width / 2,
-		menuItemRestart->getContentSize().height / 2));
-	menuItemRestart->setVisible(false);
-
-	auto menu = Menu::create(menuItemRestart, menuItemExit, NULL);
-	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
+	
 }
 
 
 /* When player come into this scene, start game immediately*/
 void MainGame::startGame() {
-	srand(time(NULL));
+	
 	randomTetris();
 	nextToCur();
 	schedule(schedule_selector(MainGame::moveUpdate), 0.5f);
@@ -926,11 +933,12 @@ void MainGame::menuExitCallback(Ref* pSender)
 
 void MainGame::menuRestartCallback(Ref* pSender)
 {
+	// 
+	menuItemRestart->setVisible(false);
+	menuItemExit->setVisible(false);
+
 	// Param init
 	initParam();
-
-	// Layout UI
-	initUI();
 
 	// Start game
 	startGame();
