@@ -137,16 +137,18 @@ void MainGame::initUI() {
 
 	// exit and restart 
 	auto exitLbl = LabelTTF::create("Exit Game", "arial", 30);
-	auto menuItemExit = MenuItemLabel::create(exitLbl, 
+	menuItemExit = MenuItemLabel::create(exitLbl, 
 		CC_CALLBACK_1(MainGame::menuExitCallback, this));
 	menuItemExit->setPosition(Vec2(visibleSize.width - menuItemExit->getContentSize().width / 2,
 		menuItemExit->getContentSize().height / 2 - 50));
+	menuItemExit->setVisible(false);
 
 	auto restartLbl = LabelTTF::create("Try Again!", "arial", 30);
-	auto menuItemRestart = MenuItemLabel::create(restartLbl,
+	menuItemRestart = MenuItemLabel::create(restartLbl,
 		CC_CALLBACK_1(MainGame::menuRestartCallback, this));
-	menuItemExit->setPosition(Vec2(visibleSize.width - menuItemExit->getContentSize().width / 2,
-		menuItemExit->getContentSize().height / 2));
+	menuItemRestart->setPosition(Vec2(visibleSize.width - menuItemRestart->getContentSize().width / 2,
+		menuItemRestart->getContentSize().height / 2));
+	menuItemRestart->setVisible(false);
 
 	auto menu = Menu::create(menuItemRestart, menuItemExit, NULL);
 	menu->setPosition(Vec2::ZERO);
@@ -445,6 +447,8 @@ void MainGame::moveUpdate(float dt)
 		if (gameOverCheck()) {
 			// show game over
 			unschedule(schedule_selector(MainGame::moveUpdate));
+			menuItemRestart->setVisible(true);
+			menuItemExit->setVisible(true);
 		}
 	}
 }

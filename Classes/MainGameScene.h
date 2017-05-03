@@ -65,6 +65,8 @@ private:
 	LabelTTF* scoreLbl;
 	LabelTTF* highScoreLbl;
 	LabelTTF* levelLbl;
+	MenuItemLabel* menuItemRestart;
+	MenuItemLabel* menuItemExit;
 	bool paused;
 
 public:
